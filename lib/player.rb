@@ -1,4 +1,5 @@
 class Player
+  include Rules
 
   attr_accessor :grid
   attr_reader   :marker
@@ -6,10 +7,6 @@ class Player
   def initialize(grid, marker)
     @grid   = grid
     @marker = marker
-  end
-
-  def valid_move?(position)
-    grid.cell_valid?(position) && grid.cell_empty?(position)
   end
 
   def place_marker(position)
