@@ -1,10 +1,11 @@
 class Game
 
-  attr_accessor :player_1, :player_2
+  attr_accessor :human, :computer, :turn
 
   def initialize
-    @player_1 = { marker: :x }
-    @player_2 = { marker: :o }
+    @human    = { marker: :x }
+    @computer = { marker: :o }
+    @turn = human
   end
 
 end

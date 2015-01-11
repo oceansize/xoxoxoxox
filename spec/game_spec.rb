@@ -1,19 +1,29 @@
-require 'game'
+require "game"
 
-describe 'The Game' do
+describe "The Game" do
 
-  context 'Has 2 Players' do
 
-    it 'Player 1 is represented by "X"' do
+
+  context "Has 2 Players" do
+
+    it "Player 1 is represented by 'X'" do
       game = Game.new
-      expect(game.player_1[:marker]).to eq :x
+      expect(game.human[:marker]).to eq :x
     end
 
-    it 'Player 2 is represented by "O"' do
+    it "Player 2 is represented by 'O'" do
       game = Game.new
-      expect(game.player_2[:marker]).to eq :o
+      expect(game.computer[:marker]).to eq :o
     end
 
+  end
+
+  context "Regulates gameplay" do
+
+    it "Starts with the Human's turn" do
+      game = Game.new
+      expect(game.turn).to eq game.human
+    end
   end
 
 end
