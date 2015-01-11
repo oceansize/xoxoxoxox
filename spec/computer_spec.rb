@@ -11,7 +11,7 @@ describe 'The AI' do
   end
 
   it 'can return the index values for marker placements' do
-    place_computer 0,4,8
+    place_computer(0,4,8)
     expect(computer.find_markers).to eq [0,4,8]
   end
 
