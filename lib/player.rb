@@ -9,11 +9,7 @@ class Player
   end
 
   def valid_move?(position)
-    grid.cell_valid?(position) && cell_empty?(position)
-  end
-
-  def cell_empty?(position)
-    grid.cells[position] == nil
+    grid.cell_valid?(position) && grid.cell_empty?(position)
   end
 
   def place_marker(position)
