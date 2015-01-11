@@ -7,6 +7,6 @@ class Computer < Player
   end
 
   def winning_row?(current_layout)
-    WINNING_COMBINATIONS.each { |combo| return true if (current_layout & combo).count == 3 }
+    WINNING_COMBINATIONS.any? { |combo| (current_layout & combo).count == 3 }
   end
 end
