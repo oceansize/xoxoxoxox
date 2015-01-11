@@ -9,8 +9,4 @@ class Grid
     @cells = Array.new(9)
   end
 
-  def cell_empty?(position)
-    cells[position] == nil
-  end
-
 end
