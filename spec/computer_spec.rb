@@ -3,12 +3,15 @@ require 'grid'
 
 describe 'The AI' do
 
+  let(:grid)     { Grid.new              }
+  let(:computer) { Computer.new grid, :o }
+
+  def place_computer(*cells)
+    cells.each { |cell| computer.place_marker(cell) }
+  end
+
   it 'can return the index values for marker placements' do
-    grid = Grid.new
-    computer = Computer.new(grid, :o)
-    computer.place_marker(0)
-    computer.place_marker(4)
-    computer.place_marker(8)
+    place_computer 0,4,8
     expect(computer.find_markers).to eq [0,4,8]
   end
 
