@@ -8,8 +8,16 @@ class Player
     @marker = marker
   end
 
+  def valid_move?(position)
+    grid.cell_valid?(position) && cell_empty?(position)
+  end
+
+  def cell_empty?(position)
+    grid.cells[position] == nil
+  end
+
   def place_marker(position)
-    grid.cell_valid?(position) ? grid.cells[position] = marker : "Invalid cell location - Please try again"
+    valid_move?(position) ? grid.cells[position] = marker : "Invalid cell location - Please try again"
   end
 
 end
