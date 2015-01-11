@@ -1,3 +1,5 @@
+require_relative 'rules'
+
 class Player
   include Rules
 
