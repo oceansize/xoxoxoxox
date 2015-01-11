@@ -1,7 +1,7 @@
 require 'computer'
 require 'grid'
 
-describe 'The AI' do
+describe 'The Computer' do
 
   let(:grid)     { Grid.new              }
   let(:computer) { Computer.new grid, :o }
@@ -12,7 +12,13 @@ describe 'The AI' do
 
   it 'can return the index values for marker placements' do
     place_computer(0,4,8)
-    expect(computer.find_markers).to eq [0,4,8]
+    expect(computer.get_markers).to eq [0,4,8]
+  end
+
+  it 'can compare marker placements against winning combinations' do
+    place_computer(0,1,2)
+    current_layout = computer.get_markers
+    expect(computer.winning_row?(current_layout)).to eq true
   end
 
 end
