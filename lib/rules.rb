@@ -7,7 +7,7 @@ module Rules
   end
 
   def placement_allowed?(position)
-    cells[position] == nil
+    cells[position].is_a? Integer
   end
 
   def valid_move?(position)

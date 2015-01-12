@@ -6,7 +6,7 @@ class Grid
   attr_accessor :cells
 
   def initialize
-    @cells = Array.new(9)
+    @cells = Array (0..8)
   end
 
 end
