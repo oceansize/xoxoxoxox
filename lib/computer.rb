@@ -11,7 +11,6 @@ class Computer < Player
   end
 
   def winning_cell(current_layout)
-    WINNING_COMBINATIONS.any? { |combo| (current_layout - combo) == [nil] }
   end
 
 end
