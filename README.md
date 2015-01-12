@@ -1,5 +1,5 @@
 # XOXOXOXOX
-### (Unbeatable Tic Tac Toe)
+### (Soon to be) Unbeatable Tic Tac Toe
 
 ![](img/next.jpg)
 
