@@ -9,4 +9,9 @@ class Computer < Player
   def winning_row?(current_layout)
     WINNING_COMBINATIONS.any? { |combo| (current_layout & combo).count == 3 }
   end
+
+  def winning_cell(current_layout)
+    WINNING_COMBINATIONS.any? { |combo| (current_layout - combo) == [nil] }
+  end
+
 end

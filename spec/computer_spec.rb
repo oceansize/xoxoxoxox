@@ -3,8 +3,9 @@ require 'grid'
 
 describe 'The Computer' do
 
-  let(:grid)     { Grid.new              }
+  let(:grid    ) { Grid.new              }
   let(:computer) { Computer.new grid, :o }
+  let(:person  ) { Player.new grid, :x   }
 
   def place_computer(*cells)
     cells.each { |cell| computer.place_marker(cell) }
@@ -20,5 +21,18 @@ describe 'The Computer' do
     current_layout = computer.get_markers
     expect(computer.winning_row?(current_layout)).to eq true
   end
+
+  it 'winning row must be same marker' do
+    place_computer(0,2)
+    person.place_marker(1)
+    current_layout = computer.get_markers
+    expect(computer.winning_row?(current_layout)).to eq false
+  end
+
+  # it 'can identify a winning cell opportunity' do
+  #   place_computer(0,1)
+  #   current_layout = computer.get_markers
+  #   expect(computer.winning_cell(current_layout)).to eq [2]
+  # end
 
 end
