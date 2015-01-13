@@ -11,6 +11,11 @@ class Computer < Player
   end
 
   def winning_cell(current_layout)
+    WINNING_COMBINATIONS.each do |combo|
+      target_cell = grid.cells.values_at(*combo)
+      target_cell.delete_if { |cell| cell.is_a? Symbol }
+      return target_cell.first if target_cell.count == 1
+    end
   end
 
 end

@@ -29,4 +29,10 @@ describe 'The Computer' do
     expect(computer.winning_row?(current_layout)).to eq false
   end
 
+  it 'can identify a winning cell opportunity' do
+    place_computer(0,2)
+    current_layout = computer.get_markers
+    expect(computer.winning_cell(current_layout)).to eq 1
+  end
+
 end
