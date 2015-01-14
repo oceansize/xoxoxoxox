@@ -4,8 +4,8 @@ class Game
 
   attr_reader :grid
 
-  def initialize
-    @grid = Grid.new
+  def initialize(board_class)
+    @grid = board_class.new
   end
 
 end
