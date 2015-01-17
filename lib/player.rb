@@ -1,18 +1,17 @@
 require_relative 'rules'
 
 class Player
-  include Rules
 
-  attr_accessor :grid
-  attr_reader   :marker
+  attr_accessor :marker
+  attr_reader   :ai
 
-  def initialize(grid, marker)
-    @grid   = grid
+  def initialize(marker=:x)
     @marker = marker
+    @ai     = ai_required?
   end
 
-  def place_marker(position)
-    valid_move?(position) ? grid.cells[position] = marker : "Invalid cell location - Please try again"
+  def ai_required?
+    self.marker == :o
   end
 
 end
