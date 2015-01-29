@@ -1,5 +1,3 @@
-require_relative 'rules'
-
 class Player
 
   attr_accessor :marker

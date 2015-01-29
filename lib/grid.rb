@@ -1,5 +1,3 @@
-require_relative 'rules'
-
 class Grid
 
   attr_reader :cells
