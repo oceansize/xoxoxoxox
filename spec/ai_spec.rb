@@ -2,12 +2,13 @@ require 'ai'
 
 describe Ai do
 
-  let!(:game)     { Game.new }
-  let!(:grid)     { Grid.new }
-  let!(:player_2) { Ai.new game  }
+  let!(:game)     { Game.new        }
+  let!(:grid)     { Grid.new        }
+  let!(:player_1) { Player.new game }
+  let!(:player_2) { Ai.new game     }
 
-  def place_computer(*cells)
-    cells.each { |cell| game.place_marker player_2, cell }
+  def place_markers(*cells, player)
+    cells.each { |cell| game.place_marker player, cell }
   end
 
   before(:each) do
@@ -16,14 +17,13 @@ describe Ai do
   end
 
   it 'can identify a winning cell opportunity' do
-    place_computer 3, 5
-    expect(game.player_2.winning_cell).to eq 4
+    place_markers 3, 5, player_2
+    expect(player_2.winning_cell).to eq 4
   end
 
-  xit 'can identify a blocking opportunity' do
-    person.place_marker(0)
-    person.place_marker(8)
-    expect(computer.block_cell).to eq 4
+  it 'can identify a blocking opportunity' do
+    place_markers 0, 8, player_1
+    expect(player_2.block_cell).to eq 4
   end
 
 end

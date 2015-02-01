@@ -15,4 +15,8 @@ class Ai < Player
     end
   end
 
+  def block_cell
+    4
+  end
+
 end
