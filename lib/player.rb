@@ -1,15 +1,10 @@
 class Player
 
-  attr_accessor :marker
-  attr_reader   :ai
+  attr_accessor :marker, :game
 
-  def initialize(marker=:x)
+  def initialize(marker=:x, game)
     @marker = marker
-    @ai     = ai_required?
-  end
-
-  def ai_required?
-    self.marker == :o
+    @game   = game
   end
 
 end

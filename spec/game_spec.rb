@@ -1,71 +1,64 @@
 require 'game'
 
-describe 'The game' do
+describe Game do
 
-  let(:game)   { Game.new }
-  let(:grid)   { double :grid, cells: [1,2,3,4,5,6,7,8,9] }
-  let(:player) { double :player                 }
-  let(:marker) { double :marker                 }
-
-  def place_computer(*cells)
-    cells.each { |cell| computer.place_marker(cell) }
-  end
+  let(:game)     { Game.new                                  }
+  let(:grid)     { double :grid, cells: [1,2,3,4,5,6,7,8,9]  }
+  let(:player_1) { double :player_1, marker: :x, game: :game }
+  let(:player_2) { double :player_2, marker: :o, game: :game }
 
   before(:each) do
-    game.grid = grid
+    game.add_grid(grid)
   end
-  # expect(player).to receive(:new).with(:marker)
 
-  it 'can have a grid of 9 cells' do
+  it 'can have a grid' do
     expect(game.grid.cells.count).to eq 9
   end
 
-  it 'can place markers on the grid' do
-    game.grid.place_marker(0)
-    expect(grid.cells[0]).to eq :x
+  it 'has a human player' do
+    game.add_human_player(Player)
+    expect(!game.player_1).to be false
   end
 
-  xit 'will see an error if marker goes out of bounds' do
-    expect(human.place_marker(20)).to eq "Invalid cell location - Please try again"
+  it 'has a computer player' do
+    game.add_computer_player(Ai)
+    expect(!game.player_2).to be false
   end
 
-  xit 'will see an error if cell already contains a marker' do
-    human.place_marker(0)
-    expect(human.place_marker(0)).to eq "Invalid cell location - Please try again"
-  end
-
-  xit 'has a list of all winning combinations' do
+  it 'has a list of all winning combinations' do
     expect(Game::WINNING_COMBINATIONS).to eq [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
   end
 
-  xit 'can return the index values for marker placements' do
-    place_computer(0,4,8)
-    expect(computer.get_markers).to eq [0,4,8]
+  it 'can place markers on the grid' do
+    allow(game.grid).to receive(:valid_move?).and_return(true)
+    game.place_marker(player_1, 0)
+    expect(grid.cells[0]).to eq :x
   end
 
-  xit 'can compare marker placements against winning combinations' do
-    place_computer(0,1,2)
-    current_layout = computer.get_markers
-    expect(computer.winning_row?(current_layout)).to eq true
+  it 'will see an error if marker goes out of bounds' do
+    allow(game.grid).to receive(:valid_move?).and_return(false)
+    expect(game.place_marker(player_1, 20)).to eq "Invalid cell location - Please try again"
   end
 
-  xit 'winning row must be same marker' do
-    place_computer(0,2)
-    person.place_marker(1)
-    current_layout = computer.get_markers
-    expect(computer.winning_row?(current_layout)).to eq false
+  it 'will see an error if cell already contains a marker' do
+    allow(game.grid).to receive(:valid_move?).and_return(false)
+    expect(game.place_marker(player_2, 0)).to eq "Invalid cell location - Please try again"
   end
 
-  xit 'can identify a winning cell opportunity' do
-    place_computer(0,2,6,7)
-    current_layout = computer.get_markers
-    expect(computer.winning_cell(current_layout)).to eq 1
+  it 'can return the index values for marker locations' do
+    allow(game.grid).to receive(:cells).and_return([:x,2,3,4,:x,6,7,8,:x])
+    expect(game.get_markers(player_1)).to eq [0,4,8]
   end
 
-  xit 'can identify a blocking opportunity' do
-    person.place_marker(0)
-    person.place_marker(8)
-    expect(computer.block_cell).to eq 4
+  it 'can identify a winning row' do
+    current_layout = [:x,:x,:x,4,5,6,7,8,9]
+    expect(game.winning_row?(current_layout)).to eq true
+  end
+
+  it 'winning row must be same marker' do
+    allow(game.grid).to receive(:cells).and_return([:x,:x,:o,4,5,6,7,8,9])
+    current_layout = game.get_markers(player_1)
+    expect(game.winning_row?(current_layout)).to eq false
   end
 
 end
