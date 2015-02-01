@@ -13,9 +13,13 @@ describe Grid do
     expect(grid.cells.has_key?("Z4")).to be false
   end
 
-  it 'knows when a cell is occupied' do
+  it 'knows when a cell is empty' do
+    expect(grid.cell_empty?("A1")).to be true
+  end
+
+  it 'will indicate when a cell is occupied' do
     grid.cells["A1"] = :x
-    expect(grid.placement_allowed?("A1", player)).to be false
+    expect(grid.valid_move?("A1")).to be false
   end
 
 end

@@ -10,8 +10,12 @@ class Grid
     }
   end
 
-  def placement_allowed?(position, player)
+  def cell_empty?(position)
     self.cells[position] == :~
+  end
+
+  def valid_move?(position)
+    cell_empty?(position) && self.cells.has_key?(position)
   end
 
 end
